@@ -1,36 +1,49 @@
 const User = require("../models/user");
-const { v4: uuidv4 } = require("uuid");
-const { setUser, getUser } = require("../service/auth");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config();
+// const { setUser, getUser } = require("../service/auth");
+
 async function handleUserSignup(req, res) {
   const { name, email, password } = req.body;
-  console.log("into user signup");
-  await User.create({
+
+  const isAlreadyExists = await User.findOne({ email });
+  if (isAlreadyExists) {
+    return res.json({
+      message: "User Already exists",
+    });
+  }
+  const user = await User.create({
     name,
     email,
     password,
   });
 
   res.json({
-    msg: "user add successfull",
+    message: "Signup successful",
+    data: user,
   });
 }
 
 async function handleUserLogin(req, res) {
   const { email, password } = req.body;
-  const user = await User.findOne({ email, password });
+  const user = await User.findOne({ email });
   if (!user) {
-    res.json({
+    return res.json({
       msg: "User not exits",
-      status: 404,
+      status: 400,
     });
   }
-  const sessionId = uuidv4();
-  setUser(sessionId, user);
-  res.cookie("uid", sessionId);
+  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+  const updatedUser = await User.findByIdAndUpdate(
+    user._id,
+    { token },
+    { new: true }
+  );
 
   res.json({
-    msg: "login successfull",
-    user,
+    msg: "login successful",
+    updatedUser,
   });
 }
 module.exports = { handleUserSignup, handleUserLogin };
