@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Box, Typography, TextField, Button } from "@mui/material";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
-// { name, email, password }
 const Login = () => {
+  console.log("login render");
+  const navigate = useNavigate();
   const [foam, setFoam] = useState({
     email: "",
     password: "",
@@ -22,12 +25,22 @@ const Login = () => {
     console.log("form data :", foam);
     LoginHandler();
   };
+
   const LoginHandler = async () => {
+    const toastId = toast.loading("Login processing...");
     try {
       const res = await axios.post("http://localhost:9000/login", foam);
       console.log("Login Response :", res);
+      const { success, msg, updatedUser } = res.data;
+      toast.success(msg);
+      if (success) {
+        sessionStorage.setItem("token", updatedUser?.token);
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.log("Error in Login :", error);
+    } finally {
+      toast.dismiss(toastId);
     }
   };
   return (

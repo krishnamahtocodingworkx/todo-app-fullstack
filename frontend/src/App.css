@@ -1,40 +1,26 @@
-.animation--wrapper {
-  padding: 2%;
-  background: #0b1011;
-}
-
-.box--1 {
-  width: 200px;
-  height: 200px;
-  background: #ff0088;
-  border-radius: 5px;
-  padding: 20px;
-}
-.box--1--child {
-  height: 50px;
-  width: 50px;
-  background: royalblue;
-  border-radius: 10px;
-}
-
-.draggable--box{
+.circle--box {
   height: 150px;
   width: 150px;
-  background: rgb(243, 151, 243);
-  margin-top: 200px;
-  color: white;
-  border-radius: 10px;
-  padding: 1rem;
-
-}
-
-.animation--button{
+  position: relative;
+  border-radius: 50%;
+  animation: flipMoment 600ms ease-in-out 1s 2;
+  /* animation: flipMoment 300ms ease-in-out 100ms infinite; */
+  background: #87ceeb;
+  top: 50%;
+  left: 50%;
   width: 100px;
   height: 100px;
+  background-color: purple;
   border-radius: 50%;
-  background: #ff0088;
-  border: none;
-  color: white;
-  font-weight: 600;
-  font-size: 1rem;
+  transition: transform 0.5s ease-in-out;
+}
+
+@keyframes flipMoment {
+  from {
+  }
+
+  to {
+    top: 0;
+    left: 500px;
+  }
 }

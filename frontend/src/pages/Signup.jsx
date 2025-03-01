@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import { Box, Typography, TextField, Button } from "@mui/material";
 import axios from "axios";
+import { GoogleLogin } from "@react-oauth/google";
+import { useNavigate } from "react-router-dom";
 
-// { name, email, password }
 const Signup = () => {
+  const navigate = useNavigate();
   const [foam, setFoam] = useState({
     name: "",
     email: "",
     password: "",
   });
+  const responseMessage = (response) => {
+    console.log(response);
+  };
+  const errorMessage = (error) => {
+    console.log(error);
+  };
 
   const formHandler = (e) => {
     const { name, value } = e.target;
@@ -21,7 +29,7 @@ const Signup = () => {
       return;
     }
     console.log("form data :", foam);
-    signupHandler()
+    signupHandler();
   };
   const signupHandler = async () => {
     try {
@@ -68,6 +76,14 @@ const Signup = () => {
         <Button type="submit" variant="contained">
           Submit
         </Button>
+        <>
+          <p>Already have account want to </p>
+          <Button variant="outlined" onClick={() => navigate("/login")}>
+            Login{" "}
+          </Button>
+        </>
+
+        <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
       </Box>
     </Box>
   );
