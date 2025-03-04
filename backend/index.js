@@ -66,9 +66,7 @@ app.use(cors());
 
 // MongoDB Connection
 mongoose
-  .connect(
-    "mongodb+srv://krishnamahto:XnzgCWSz6UsfNxYB@cluster0.z6bzh.mongodb.net/"
-  )
+  .connect(process.env.DB_URL)
   .then(() => console.log(`✅ DB connected successfully`))
   .catch((err) => console.error(`❌ Error in DB connection:`, err));
 
