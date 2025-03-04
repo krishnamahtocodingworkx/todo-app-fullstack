@@ -24,21 +24,25 @@ const UserSchema = new mongoose.Schema(
       select: false, // Prevents password from being returned in queries by default
     },
     dob: {
-      type: Date,
-      required: [true, "Date of birth is required"],
+      type: String,
+      trim: true,
+      maxlength: [10, "dob cannot exceed 10 characters"],
     },
     country: {
       type: String,
-      required: [true, "Country is required"],
+      trim: true,
+      minlength: [3, "country must be at least 3 characters long"],
+      maxlength: [50, "country cannot exceed 50 characters"],
     },
     phoneNo: {
       type: String,
-      required: [true, "Phone number is required"],
       match: [/^\d{10,15}$/, "Phone number must be 10-15 digits long"],
+      trim: true,
+      minlength: [3, "country must be at least 3 characters long"],
+      maxlength: [50, "country cannot exceed 50 characters"],
     },
     countryCode: {
       type: String,
-      required: [true, "Country code is required"],
       match: [/^\+\d{1,4}$/, "Invalid country code format"],
     },
     createdAt: {
