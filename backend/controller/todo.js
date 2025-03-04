@@ -24,6 +24,7 @@ async function addTodo(req, res) {
     return res.json({
       msg: "Todo created",
       newTodo,
+      success: true,
     });
   } catch (error) {
     return res.json({
@@ -94,7 +95,7 @@ async function deleteTodo(req, res) {
     return res.status(400).json({ msg: "todo not found" });
   }
   res.json({
-    msg: "Todo deleted successfull",
+    msg: "Todo deleted successful",
     deleted,
   });
 }

@@ -7,11 +7,11 @@ async function restrictToLoggedInUser(req, res, next) {
   try {
     // const token = req.header("Authorization");
     const token = req.headers.authorization;
-    if(!token){
+    if (!token) {
       return res.json({
-        message:"Please Login again",
-        status:401
-      })
+        message: "Please Login again",
+        status: 401,
+      });
     }
     const verified = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);
     const user = await User.findOne({ _id: verified.id });
@@ -21,7 +21,6 @@ async function restrictToLoggedInUser(req, res, next) {
         status: 400,
       });
     }
-    console.log("user :", user);
   } catch (error) {
     return res.json({
       message: "Something wrong in verification",
