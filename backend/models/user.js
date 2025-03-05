@@ -49,6 +49,7 @@ const UserSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
+    token:String
   },
   { timestamps: true }
 );

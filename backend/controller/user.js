@@ -44,7 +44,7 @@ async function handleUserLogin(req, res) {
   res.json({
     msg: "login successful",
     updatedUser,
-    success:true
+    success: true,
   });
 }
 module.exports = { handleUserSignup, handleUserLogin };
