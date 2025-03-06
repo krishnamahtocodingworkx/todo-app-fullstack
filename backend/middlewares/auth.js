@@ -21,6 +21,7 @@ async function restrictToLoggedInUser(req, res, next) {
         status: 400,
       });
     }
+    console.log("Authentication successful.........");
   } catch (error) {
     return res.json({
       message: "Something wrong in verification",

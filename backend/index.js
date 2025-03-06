@@ -44,6 +44,7 @@ const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/user");
 const todoRoute = require("./routes/todo");
 const profileRoute = require("./routes/profile");
+const listingRoute = require("./routes/listing");
 const { restrictToLoggedInUser } = require("./middlewares/auth");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -103,6 +104,7 @@ app.post("/upload", upload.single("profileImage"), (req, res) => {
 app.use("/", userRoute);
 app.use("/", restrictToLoggedInUser, todoRoute);
 app.use("/", restrictToLoggedInUser, profileRoute);
+app.use("/", restrictToLoggedInUser, listingRoute);
 
 // Start Server
 app.listen(PORT, () => {
