@@ -18,30 +18,40 @@ const Login = () => {
   };
   const formSubmitHandler = (e) => {
     e.preventDefault();
-    if (!foam.email || !foam.password) {
-      alert("All fields must be filled !!!");
-      return;
-    }
-    console.log("form data :", foam);
+    // if (!foam.email || !foam.password) {
+    //   alert("All fields must be filled !!!");
+    //   return;
+    // }
+    // console.log("form data :", foam);
     LoginHandler();
   };
 
   const LoginHandler = async () => {
-    const toastId = toast.loading("Login processing...");
+    // const toastId = toast.loading("Login processing...");s
+
     try {
-      const res = await axios.post("http://localhost:9000/login", foam);
-      console.log("Login Response :", res);
-      const { success, msg, updatedUser } = res.data;
-      toast.success(msg);
-      if (success) {
-        sessionStorage.setItem("token", updatedUser?.token);
-        navigate("/dashboard");
-      }
+      const res = await axios.post(
+        "http://64.227.152.70:9000/api/v1/user/login",
+        { email: "test1@yopmail.com", password: "kuchbhi" }
+      );
+      console.log("Response :", res);
     } catch (error) {
-      console.log("Error in Login :", error);
-    } finally {
-      toast.dismiss(toastId);
+      console.log("Error :", error);
     }
+    // try {
+    //   const res = await axios.post("http://localhost:9000/login", foam);
+    //   console.log("Login Response :", res);
+    //   const { success, msg, updatedUser } = res.data;
+    //   toast.success(msg);
+    //   if (success) {
+    //     sessionStorage.setItem("token", updatedUser?.token);
+    //     navigate("/dashboard");
+    //   }
+    // } catch (error) {
+    //   console.log("Error in Login :", error);
+    // } finally {
+    //   toast.dismiss(toastId);
+    // }
   };
   return (
     <Box sx={{ width: "100vw", height: "100vh" }}>

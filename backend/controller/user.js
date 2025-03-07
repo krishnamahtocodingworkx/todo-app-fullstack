@@ -34,6 +34,14 @@ async function handleUserLogin(req, res) {
       status: 400,
     });
   }
+  console.log('user :',user);
+  console.log('password :',password);
+  if (password !== user.password) {
+    return res.json({
+      msg: "Password incorrect",
+      status: 404,
+    });
+  }
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
   const updatedUser = await User.findByIdAndUpdate(
     user._id,
