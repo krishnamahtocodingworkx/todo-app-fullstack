@@ -20,6 +20,7 @@ async function handleProfileDetails(req, res) {
     res.status(500).json({
       message: "Error fetching profile details",
       error: error.message,
+      success:false
     });
   }
 }

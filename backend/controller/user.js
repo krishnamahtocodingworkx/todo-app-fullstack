@@ -11,6 +11,7 @@ async function handleUserSignup(req, res) {
   if (isAlreadyExists) {
     return res.json({
       message: "User Already exists",
+      success:false
     });
   }
   const user = await User.create({
@@ -22,6 +23,7 @@ async function handleUserSignup(req, res) {
   res.json({
     message: "Signup successful",
     data: user,
+    success:true
   });
 }
 
@@ -32,6 +34,7 @@ async function handleUserLogin(req, res) {
     return res.json({
       msg: "User not exits",
       status: 400,
+      success:false
     });
   }
   console.log('user :',user);
@@ -40,6 +43,7 @@ async function handleUserLogin(req, res) {
     return res.json({
       msg: "Password incorrect",
       status: 404,
+      success:false
     });
   }
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);

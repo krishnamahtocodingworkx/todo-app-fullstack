@@ -10,6 +10,7 @@ async function addTodo(req, res) {
     if (!parsePayload.success) {
       res.status(411).json({
         msg: "You send the wrong inputs",
+        success:false
       });
       return;
     }
@@ -29,6 +30,7 @@ async function addTodo(req, res) {
   } catch (error) {
     return res.json({
       message: "Todo creation failed",
+      success:false
     });
   }
 }
@@ -41,7 +43,11 @@ async function getAllTodos(req, res) {
   } catch (error) {
     res
       .status(500)
-      .json({ message: "Error fetching todos", error: error.message });
+      .json({
+        message: "Error fetching todos",
+        error: error.message,
+        success: false,
+      });
   }
 }
 
@@ -51,6 +57,7 @@ async function updatingTodo(req, res) {
   if (!parsePayload.success) {
     res.status(411).json({
       msg: "You sent the wrong input",
+      success: false,
     });
     return;
   }
@@ -71,6 +78,7 @@ async function updatingTodo(req, res) {
   res.json({
     msg: "updated todo",
     updatedTodo,
+    success: true,
   });
 }
 
@@ -82,6 +90,7 @@ async function deleteTodo(req, res) {
   if (!parsePayload.success) {
     res.status({
       msg: "You send the wrong input",
+      success: false,
     });
     return;
   }
@@ -97,6 +106,7 @@ async function deleteTodo(req, res) {
   res.json({
     msg: "Todo deleted successful",
     deleted,
+    success: true,
   });
 }
 
