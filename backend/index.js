@@ -100,7 +100,12 @@ app.post("/upload", upload.single("profileImage"), (req, res) => {
 });
 
 // Routes
-// app.get("/", (req, res) => res.send("Welcome to todo"));
+app.get("/", (req, res) =>
+  res.status(200).json({
+    message: "Welcome to Todo app",
+    success: true,
+  })
+);
 app.use("/", userRoute);
 app.use("/todo", restrictToLoggedInUser, todoRoute);
 app.use("/profile", restrictToLoggedInUser, profileRoute);
