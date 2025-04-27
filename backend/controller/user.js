@@ -66,7 +66,7 @@ async function handleUserLogin(req, res) {
     const user = await User.findOne({ email });
     if (!user) {
       return res.json({
-        msg: "User not exits",
+        message: "User not exits",
         status: 400,
         success: false,
       });
@@ -74,7 +74,7 @@ async function handleUserLogin(req, res) {
     const isPasswordCorrect = await verifyPassword(password, user.password);
     if (!isPasswordCorrect) {
       return res.json({
-        msg: "Password incorrect",
+        message: "Password incorrect",
         status: 404,
         success: false,
       });
@@ -87,7 +87,7 @@ async function handleUserLogin(req, res) {
     );
 
     res.json({
-      msg: "login successful",
+      message: "login successful",
       updatedUser,
       success: true,
     });
