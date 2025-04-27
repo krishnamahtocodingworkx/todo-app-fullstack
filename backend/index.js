@@ -58,7 +58,6 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 9000;
-// const upload = multer({ dest: "uploads/" });
 
 // Middleware
 app.use(express.json());
@@ -101,10 +100,11 @@ app.post("/upload", upload.single("profileImage"), (req, res) => {
 });
 
 // Routes
+// app.get("/", (req, res) => res.send("Welcome to todo"));
 app.use("/", userRoute);
-app.use("/", restrictToLoggedInUser, todoRoute);
-app.use("/", restrictToLoggedInUser, profileRoute);
-app.use("/", restrictToLoggedInUser, listingRoute);
+app.use("/todo", restrictToLoggedInUser, todoRoute);
+app.use("/profile", restrictToLoggedInUser, profileRoute);
+app.use("/list", restrictToLoggedInUser, listingRoute);
 
 // Start Server
 app.listen(PORT, () => {

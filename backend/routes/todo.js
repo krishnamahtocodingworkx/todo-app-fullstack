@@ -8,9 +8,9 @@ const {
 
 const router = express.Router();
 
-router.post("/todo", addTodo);
+router.post("/add", addTodo);
 router.delete("/delete", deleteTodo);
 router.get("/todos", getAllTodos);
-router.put("/completed", updatingTodo);
+router.put("/update", updatingTodo);
 
 module.exports = router;

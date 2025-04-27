@@ -5,7 +5,7 @@ const createTodo = zod.object({
   description: zod.string(),
 });
 const updateTodo = zod.object({
-  id: zod.string(),
+  todoId: zod.string(),
 });
 
 module.exports = {

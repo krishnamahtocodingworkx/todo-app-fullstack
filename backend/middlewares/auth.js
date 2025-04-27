@@ -16,14 +16,14 @@ async function restrictToLoggedInUser(req, res, next) {
     const verified = jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);
     const user = await User.findOne({ _id: verified.id });
     if (!user) {
-      return res.json({
+      return res.status(404).json({
         message: "User not authorized",
-        status: 400,
+        status: 404,
       });
     }
-    console.log("Authentication successful.........");
+    req.user = user;
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       message: "Something wrong in verification",
     });
   }
