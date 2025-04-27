@@ -105,6 +105,16 @@ async function deleteTodo(req, res) {
         success: false,
       });
     }
+    const isTodoExist = await todo.findOne({
+      _id: todoId,
+      createdBy: user._id,
+    });
+    if (!isTodoExist) {
+      return res.status(404).json({
+        message: "Todo not found",
+        success: false,
+      });
+    }
     const deleted = await todo.findOneAndDelete({
       _id: todoId,
       createdBy: user._id,
@@ -119,6 +129,7 @@ async function deleteTodo(req, res) {
       success: true,
     });
   } catch (error) {
+    console.log("error :", error);
     res.status(500).json({
       message: ExceptionMessage.SOMETHING_WENT_WRONG,
       error: error,
