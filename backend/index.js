@@ -45,6 +45,7 @@ const userRoute = require("./routes/user");
 const todoRoute = require("./routes/todo");
 const profileRoute = require("./routes/profile");
 const listingRoute = require("./routes/listing");
+const blogRoute = require("./routes/blogs");
 const { restrictToLoggedInUser } = require("./middlewares/auth");
 const cors = require("cors");
 const dotenv = require("dotenv");
@@ -52,6 +53,7 @@ const multer = require("multer");
 const mongoose = require("mongoose");
 const path = require("path");
 const { v4: uuidv4 } = require("uuid");
+const { getAllBlogs } = require("./controller/blogs");
 
 // Load environment variables first
 dotenv.config();
@@ -107,6 +109,7 @@ app.get("/", (req, res) =>
   })
 );
 app.use("/", userRoute);
+app.use("/blogs", blogRoute);
 app.use("/todo", restrictToLoggedInUser, todoRoute);
 app.use("/profile", restrictToLoggedInUser, profileRoute);
 app.use("/list", restrictToLoggedInUser, listingRoute);
