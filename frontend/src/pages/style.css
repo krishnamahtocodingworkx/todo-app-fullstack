@@ -51,56 +51,70 @@
   background: rgb(198, 234, 198);
 } */
 
-
 /* styles.css */
 
 .container {
-    height: 200vh;
-    width: 100%;
-    background: black;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .door {
-    position: absolute;
-    width: 160px;
-    height: 240px;
-    background: gray;
-    display: flex;
-    overflow: hidden;
-  }
-  
-  .door-left,
-  .door-right {
-    width: 50%;
-    height: 100%;
-    background: #555;
-  }
-  
-  .rocket {
-    position: absolute;
-    bottom: 10px;
-    width: 80px;
-  }
-  
-  .final-screen {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: black;
-  }
-  
-  .final-text {
-    color: white;
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  
+  height: 200vh;
+  width: 100%;
+  background: black;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.door {
+  position: absolute;
+  width: 160px;
+  height: 240px;
+  background: gray;
+  display: flex;
+  overflow: hidden;
+}
+
+.door-left,
+.door-right {
+  width: 50%;
+  height: 100%;
+  background: #555;
+}
+
+.rocket {
+  position: absolute;
+  bottom: 10px;
+  width: 80px;
+}
+
+.final-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+}
+
+.final-text {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.practice--form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 50%;
+  margin: 0 auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.input-field {
+  padding: 5px 10px;
+}

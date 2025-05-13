@@ -21,10 +21,15 @@ async function restrictToLoggedInUser(req, res, next) {
         status: 404,
       });
     }
+    if (user.token !== token.split(" ")[1]) {
+      return res.status(400).json({
+        message: "Session Expired Please Login again!",
+      });
+    }
     req.user = user;
   } catch (error) {
     return res.status(500).json({
-      message: "Something wrong in verification",
+      message: "Something went wrong, Please Login again!",
     });
   }
   next();

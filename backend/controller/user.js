@@ -100,4 +100,21 @@ async function handleUserLogin(req, res) {
     });
   }
 }
-module.exports = { handleUserSignup, handleUserLogin };
+async function handleLogout(req, res) {
+  try {
+    const { user } = req;
+    await User.findByIdAndUpdate(user._id, { token: null });
+    return res.status(201).json({
+      message: "Logout successful",
+      success: true,
+    });
+  } catch (error) {
+    console.log("error :", error);
+    return res.status(500).json({
+      message: ExceptionMessage.SOMETHING_WENT_WRONG,
+      success: false,
+      error,
+    });
+  }
+}
+module.exports = { handleUserSignup, handleUserLogin, handleLogout };
